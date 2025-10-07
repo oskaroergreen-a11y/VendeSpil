@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vendespil</title>
+  <style>
+    /* Home/Start page styles */
+    .home-wrapper {
+  /* ...existing code... */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+  background: #94A3B8;
+      position: absolute;
+      top: 0; left: 0;
+      z-index: 10;
+    }
+    .start-btn {
+  background: #388E3C;
+  color: #222;
+  border: none;
+  border-radius: 12px;
+  padding: 24px 64px;
+  font-size: 2.4em;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 32px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+    }
+    .home-btn {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  background: #388E3C;
+  color: #222;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 32px;
+  font-size: 1.1em;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 20;
+  display: none;
+  transition: background 0.2s;
+    }
+    .matched-animate {
+      animation: shakeMatch 1.3s ease-in-out;
+      z-index: 2;
+    }
+    @keyframes shakeMatch {
+      0% { transform: rotateZ(0deg) scale(1); }
+      10% { transform: rotateZ(-15deg) scale(1.08); }
+      20% { transform: rotateZ(15deg) scale(1.08); }
+      30% { transform: rotateZ(-12deg) scale(1.06); }
+      40% { transform: rotateZ(12deg) scale(1.06); }
+      50% { transform: rotateZ(-8deg) scale(1.04); }
+      60% { transform: rotateZ(8deg) scale(1.04); }
+      70% { transform: rotateZ(-4deg) scale(1.02); }
+      80% { transform: rotateZ(4deg) scale(1.02); }
+      90% { transform: rotateZ(0deg) scale(1); }
+      100% { transform: rotateZ(0deg) scale(1); }
+    }
+    .restart-btn.pressed {
+      animation: pressDown 0.2s;
+    }
+    @keyframes pressDown {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.93); }
+      100% { transform: scale(1); }
+    }
+    .game-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100vw;
+    }
+    .restart-btn {
+      display: block;
+      margin: 32px auto 24px auto;
+      padding: 0 48px;
+      height: 56px;
+      min-width: 180px;
+      width: fit-content;
+  background-color: #388E3C;
+      color: #222;
+      font-size: 2rem;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s;
+    }
+    .restart-btn:hover {
+      background-color: #5aa93a;
+    }
+  /* Farver til hvert par */
+  .pair-2   { background-color: #D8A7B1; }
+  .pair-33  { background-color: #E18A7E; }
+  .pair-22  { background-color: #C85A54; }
+  .pair-55  { background-color: #A85143; }
+  .pair-62  { background-color: #D27D49; }
+  .pair-3   { background-color: #E1B55B; }
+  .pair-8   { background-color: #A5B374; }
+  .pair-7   { background-color: #8E7B9B; }
+  .pair-11  { background-color: #7C4A4D; }
+  .pair-9   { background-color: #D9C9B6; }
+    body {
+  background-color: #94A3B8;
+      /* Baggrund som dit billede */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(5, 100px);
+      grid-template-rows: repeat(4, 140px);
+      gap: 20px;
+    }
+
+    .card {
+  border: 2px solid #94A3B8;
+  background-color: transparent;
+  width: 100px;
+  height: 140px;
+  perspective: 600px;
+  position: relative;
+  display: inline-block;
+  border-radius: 8px;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.45s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 64px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      backface-visibility: hidden;
+      border-radius: 8px;
+    }
+
+    .card-front {
+      background-color: #e0e0e0;
+      color: #729eb7;
+      border: 2px dashed #e0e0e0;
+    }
+
+    .card-back {
+  color: black;
+  border: 2px solid #94A3B8;
+  transform: rotateY(180deg);
+    }
+
+    .newcard {
+      background-color: #94A3B8;
+      /* Lys grå for ikke-vendte kort */
+      color: transparent;
+      /* Skjul tallet */
+      border: 2px dashed #94A3B8;
+    }
+
+    .matched {
+      background-color: #a8bc7c;
+      /* Grønlig */
+    }
+
+    .picked {
+      background-color: #a084c1;
+      /* Lilla */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="home-wrapper" id="homeWrapper">
+  <h1 style="color:black; font-size:4em; margin-bottom:40px; font-family:Arial,sans-serif; font-weight:bold;">Vende spil</h1>
+    <button class="start-btn" id="startBtn">Start</button>
+  </div>
+  <button class="home-btn" id="homeBtn">Home</button>
+  <div class="game-wrapper" id="gameWrapper">
+    <button class="restart-btn" id="restartBtn">Restart</button>
+    <div class="container" id="cardContainer"></div>
+  </div>
+
+<script>
+  // Home/Start page logic
+  const homeWrapper = document.getElementById('homeWrapper');
+  const gameWrapper = document.getElementById('gameWrapper');
+  const homeBtn = document.getElementById('homeBtn');
+  const startBtn = document.getElementById('startBtn');
+
+  function showHome() {
+    homeWrapper.style.display = 'flex';
+    gameWrapper.style.display = 'none';
+    homeBtn.style.display = 'none';
+  }
+  function showGame() {
+    homeWrapper.style.display = 'none';
+    gameWrapper.style.display = 'flex';
+    homeBtn.style.display = 'block';
+  }
+  startBtn.addEventListener('click', showGame);
+  homeBtn.addEventListener('click', showHome);
+  // Start med home page
+  showHome();
+  // Kortdata
+  const cardData = [
+    {value: '2', cls: 'pair-2'}, {value: '2', cls: 'pair-2'},
+    {value: '33', cls: 'pair-33'}, {value: '33', cls: 'pair-33'},
+    {value: '22', cls: 'pair-22'}, {value: '22', cls: 'pair-22'},
+    {value: '55', cls: 'pair-55'}, {value: '55', cls: 'pair-55'},
+    {value: '62', cls: 'pair-62'}, {value: '62', cls: 'pair-62'},
+    {value: '3', cls: 'pair-3'}, {value: '3', cls: 'pair-3'},
+    {value: '8', cls: 'pair-8'}, {value: '8', cls: 'pair-8'},
+    {value: '7', cls: 'pair-7'}, {value: '7', cls: 'pair-7'},
+    {value: '11', cls: 'pair-11'}, {value: '11', cls: 'pair-11'},
+    {value: '9', cls: 'pair-9'}, {value: '9', cls: 'pair-9'}
+  ];
+
+  // Fisher-Yates shuffle
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  // Generer kortene
+  function renderCards() {
+    const shuffled = shuffle([...cardData]);
+    const container = document.getElementById('cardContainer');
+    container.innerHTML = '';
+    shuffled.forEach(card => {
+      container.innerHTML += `
+        <div class="card newcard"><div class="card-inner"><div class="card-front"></div><div class="card-back ${card.cls}">${card.value}</div></div></div>
+      `;
+    });
+  }
+
+  renderCards();
+  // Vis home-knap kun når spillet vises
+  showHome();
+  // Restart-knap funktion med tryk-animation og shuffle
+  const restartBtn = document.getElementById('restartBtn');
+  restartBtn.addEventListener('click', function() {
+    restartBtn.classList.add('pressed');
+    setTimeout(function() {
+      restartBtn.classList.remove('pressed');
+      renderCards();
+      // Nulstil spillet
+      flippedCards = [];
+      lockBoard = false;
+      addCardListeners();
+    }, 200);
+  });
+  let flippedCards = [];
+  let lockBoard = false;
+
+  function addCardListeners() {
+    document.querySelectorAll('.card.newcard').forEach(function(card) {
+      card.addEventListener('click', function handler() {
+        if (lockBoard || flippedCards.includes(card)) return;
+        card.classList.add('flipped');
+        flippedCards.push(card);
+        if (flippedCards.length === 2) {
+          lockBoard = true;
+          setTimeout(function() {
+            flippedCards[0].classList.remove('newcard');
+            flippedCards[1].classList.remove('newcard');
+            const val1 = flippedCards[0].querySelector('.card-back').textContent;
+            const val2 = flippedCards[1].querySelector('.card-back').textContent;
+            if (val1 === val2) {
+              flippedCards.forEach(c => {
+                c.classList.add('matched-animate');
+                c.removeEventListener('click', handler);
+              });
+              setTimeout(function() {
+                flippedCards.forEach(c => c.classList.remove('matched-animate'));
+                flippedCards = [];
+                lockBoard = false;
+              }, 1000);
+            } else {
+              setTimeout(function() {
+                flippedCards.forEach(c => {
+                  c.classList.remove('flipped');
+                  c.classList.add('newcard');
+                });
+                flippedCards = [];
+                lockBoard = false;
+              }, 450);
+            }
+          }, 310);
+         }
+      });
+    });
+  }
+
+  addCardListeners();
+</script>
+</body>
+
+</html>
