@@ -215,7 +215,7 @@
 
 <body>
   <div class="home-wrapper" id="homeWrapper">
-  <h1 style="color:black; font-size:4em; margin-bottom:40px; font-family:Arial,sans-serif; font-weight:bold;">Vendespil</h1>
+  <h1 style="color:black; font-size:4em; margin-bottom:40px; font-family:Arial,sans-serif; font-weight:bold;">Vende spil</h1>
     <button class="start-btn" id="startBtn">Start</button>
   </div>
   <button class="home-btn" id="homeBtn">Home</button>
@@ -232,12 +232,6 @@
   const startBtn = document.getElementById('startBtn');
 
   function showHome() {
-    // Nulstil spillet først (samme som restart knap)
-    renderCards();
-    flippedCards = [];
-    lockBoard = false;
-    addCardListeners();
-    // Så vis home page
     homeWrapper.style.display = 'flex';
     gameWrapper.style.display = 'none';
     homeBtn.style.display = 'none';
@@ -298,7 +292,9 @@
     });
   }
 
+  // Initialiser spillet
   renderCards();
+  addCardListeners();
   // Vis home-knap kun når spillet vises
   showHome();
   // Restart-knap funktion med tryk-animation og shuffle
@@ -355,8 +351,6 @@
       });
     });
   }
-
-  addCardListeners();
 </script>
 </body>
 
