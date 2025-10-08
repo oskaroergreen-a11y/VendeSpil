@@ -116,6 +116,38 @@
     .home-btn:hover {
       background-color: #5aa93a;
     }
+    
+    /* Timer bokse */
+    .timer-container {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      grid-template-columns: repeat(2, 80px);
+      grid-template-rows: repeat(3, 60px);
+      gap: 15px;
+      z-index: 5;
+    }
+    .timer-box {
+      background-color: #388E3C;
+      color: #222;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .timer-box:hover {
+      background-color: #5aa93a;
+    }
+    
   /* Farver til hvert par */
   .pair-2   { background-color: #D8A7B1; }
   .pair-33  { background-color: #E18A7E; }
@@ -219,6 +251,17 @@
     <button class="start-btn" id="startBtn">Start</button>
   </div>
   <button class="home-btn" id="homeBtn">Home</button>
+  
+  <!-- Timer bokse -->
+  <div class="timer-container">
+    <div class="timer-box">10 sek</div>
+    <div class="timer-box">20 sek</div>
+    <div class="timer-box">30 sek</div>
+    <div class="timer-box">40 sek</div>
+    <div class="timer-box">50 sek</div>
+    <div class="timer-box">60 sek</div>
+  </div>
+  
   <div class="game-wrapper" id="gameWrapper">
     <div class="container" id="cardContainer"></div>
   </div>
