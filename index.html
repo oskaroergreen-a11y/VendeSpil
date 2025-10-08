@@ -237,6 +237,12 @@
     homeBtn.style.display = 'none';
   }
   function showGame() {
+    // Reset spillet først for at sikre nyt spil
+    renderCards();
+    flippedCards = [];
+    lockBoard = false;
+    addCardListeners();
+    // Så vis spillet
     homeWrapper.style.display = 'none';
     gameWrapper.style.display = 'flex';
     homeBtn.style.display = 'block';
