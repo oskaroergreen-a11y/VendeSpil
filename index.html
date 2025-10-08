@@ -51,7 +51,6 @@
   font-family: Arial, sans-serif;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   z-index: 20;
   display: none;
   transition: background 0.2s;
@@ -100,7 +99,6 @@
       height: 6px;
       background: #000000;
       z-index: 15;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
     }
     
     /* Dekorativ streg i bunden */
@@ -112,7 +110,6 @@
       height: 6px;
       background: #000000;
       z-index: 15;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
     }
     
     .game-wrapper {
@@ -136,7 +133,6 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       transition: background 0.2s;
     }
     .restart-btn:hover {
@@ -172,12 +168,70 @@
       align-items: center;
       width: 80px;
       height: 60px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       cursor: pointer;
       transition: background 0.2s;
     }
     .timer-box:hover {
       background-color: #5aa93a;
+    }
+    
+    .timer-box.selected {
+      background-color: #2E7D32;
+      border: 2px solid #1B5E20;
+    }
+    
+    /* Burger Menu */
+    .burger-menu {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      background-color: #388E3C;
+      border-radius: 0 30px 30px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 99;
+      box-shadow: none;
+      transition: left 0.3s ease, transform 0.2s;
+    }
+    
+    .burger-menu.menu-open {
+      left: 300px;
+    }
+    
+    .burger-menu:hover {
+      transform: translateY(-50%);
+    }
+    
+    .burger-line {
+      width: 20px;
+      height: 3px;
+      background-color: #222;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    /* Menu Panel */
+    .menu-panel {
+      position: fixed;
+      top: 94px;
+      left: -360px;
+      width: 360px;
+      height: calc(100vh - 188px);
+      background-color: #388E3C;
+      border-right: 5px solid #000000;
+      z-index: 99;
+      transition: left 0.3s ease;
+    }
+    
+    .menu-panel.open {
+      left: 0;
     }
     
     /* 10 sek box på venstre side */
@@ -186,6 +240,32 @@
       top: 15px;
       left: 29px;
       z-index: 20;
+    }
+    
+    /* Timer pinde ved siden af 60 sek */
+    .timer-stick-background {
+      position: fixed;
+      top: 24px;
+      left: 604px;
+      width: 600px;
+      height: 42px;
+      background-color: #000000;
+      border-radius: 21px;
+      z-index: 5;
+      display: none;
+    }
+    
+    .timer-stick-foreground {
+      position: fixed;
+      top: 24px;
+      left: 604px;
+      width: 600px;
+      height: 42px;
+      background-color: #388E3C;
+      border-radius: 21px;
+      z-index: 6;
+      display: none;
+      transition: width 0.1s linear;
     }
     
   /* Farver til hvert par */
@@ -225,6 +305,12 @@
   position: relative;
   display: inline-block;
   border-radius: 8px;
+  transition: transform 0.2s;
+  cursor: pointer;
+    }
+    
+    .card:hover {
+      transform: translateY(-3px);
     }
 
     .card-inner {
@@ -286,6 +372,17 @@
 </head>
 
 <body>
+  <!-- Burger Menu -->
+  <div class="burger-menu" id="burgerMenu">
+    <div class="burger-line"></div>
+    <div class="burger-line"></div>
+    <div class="burger-line"></div>
+  </div>
+  
+  <!-- Slide-out Panel -->
+  <div class="menu-panel" id="menuPanel">
+  </div>
+  
   <div class="home-wrapper" id="homeWrapper">
   <h1 style="color:black; font-size:4em; margin-bottom:40px; font-family:Arial,sans-serif; font-weight:bold;">Vendespil</h1>
     <button class="start-btn" id="startBtn">Start</button>
@@ -305,6 +402,10 @@
     <div class="timer-box">60 sek</div>
   </div>
   
+  <!-- Timer pinde ved siden af 60 sek -->
+  <div class="timer-stick-background" id="timerStickBg"></div>
+  <div class="timer-stick-foreground" id="timerStickFg"></div>
+  
   <div class="game-wrapper" id="gameWrapper">
     <div class="container" id="cardContainer"></div>
   </div>
@@ -319,12 +420,27 @@
   const homeBtn = document.getElementById('homeBtn');
   const startBtn = document.getElementById('startBtn');
   const timerBoxLeft = document.getElementById('timerBoxLeft');
+  const timerStickBg = document.getElementById('timerStickBg');
+  const timerStickFg = document.getElementById('timerStickFg');
+  const burgerMenu = document.getElementById('burgerMenu');
+  const menuPanel = document.getElementById('menuPanel');
+  
+  // Timer variabler
+  let selectedTime = 0;
+  let timerRunning = false;
+  let timeLeft = 0;
+  let timerInterval = null;
+  let gameStarted = false;
 
   function showHome() {
     homeWrapper.style.display = 'flex';
     gameWrapper.style.display = 'none';
     homeBtn.style.display = 'none';
     timerBoxLeft.style.display = 'none';
+    timerStickBg.style.display = 'none';
+    timerStickFg.style.display = 'none';
+    // Reset timer
+    resetTimer();
   }
   function showGame() {
     // Reset spillet først for at sikre nyt spil
@@ -337,6 +453,7 @@
     gameWrapper.style.display = 'flex';
     homeBtn.style.display = 'block';
     timerBoxLeft.style.display = 'flex';
+    gameStarted = false;
   }
   startBtn.addEventListener('click', function() {
     startBtn.classList.add('pressed');
@@ -366,6 +483,118 @@
     box.addEventListener('mouseleave', function() {
       this.classList.remove('pressed');
     });
+  });
+  
+  // Timer funktioner
+  function resetTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+    timerRunning = false;
+    gameStarted = false;
+    selectedTime = 0;
+    timeLeft = 0;
+    timerStickFg.style.width = '600px';
+    // Fjern selected fra alle timer-boxe
+    document.querySelectorAll('.timer-box').forEach(box => {
+      box.classList.remove('selected');
+    });
+  }
+  
+  function selectTimer(seconds) {
+    resetTimer();
+    selectedTime = seconds;
+    timeLeft = seconds;
+    // Highlight den valgte timer
+    document.querySelectorAll('.timer-box').forEach(box => {
+      box.classList.remove('selected');
+    });
+    event.target.classList.add('selected');
+  }
+  
+  function startTimer() {
+    if (selectedTime === 0 || timerRunning) return;
+    
+    timerRunning = true;
+    gameStarted = true;
+    timerStickBg.style.display = 'block';
+    timerStickFg.style.display = 'block';
+    
+    timerInterval = setInterval(() => {
+      timeLeft -= 0.1;
+      const percentage = (timeLeft / selectedTime) * 100;
+      timerStickFg.style.width = Math.max(0, percentage * 6) + 'px';
+      
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        alert('Tiden er udløbet! 🕒');
+        // Reset spillet
+        showHome();
+      }
+    }, 100);
+  }
+  
+  // Tilføj klik events til timer-boxe
+  document.querySelectorAll('.timer-box').forEach(box => {
+    box.addEventListener('click', function(event) {
+      const text = this.textContent;
+      const seconds = parseInt(text);
+      selectTimer(seconds);
+    });
+  });
+  
+  // Burger Menu funktionalitet
+  let menuOpen = false;
+  
+  burgerMenu.addEventListener('click', function() {
+    menuOpen = !menuOpen;
+    
+    if (menuOpen) {
+      menuPanel.classList.add('open');
+      burgerMenu.classList.add('menu-open');
+    } else {
+      menuPanel.classList.remove('open');
+      burgerMenu.classList.remove('menu-open');
+    }
+    
+    // Animér burger linjer - fold til 1 streg
+    const lines = this.querySelectorAll('.burger-line');
+    if (menuOpen) {
+      lines[0].style.transform = 'translateY(9px)';
+      lines[1].style.transform = 'none';
+      lines[2].style.transform = 'translateY(-9px)';
+    } else {
+      lines[0].style.transform = 'none';
+      lines[1].style.transform = 'none';
+      lines[2].style.transform = 'none';
+    }
+  });
+  
+  // Funktion til at lukke menu
+  function closeMenu() {
+    menuOpen = false;
+    menuPanel.classList.remove('open');
+    burgerMenu.classList.remove('menu-open');
+    const lines = burgerMenu.querySelectorAll('.burger-line');
+    lines[0].style.transform = 'none';
+    lines[1].style.transform = 'none';
+    lines[2].style.transform = 'none';
+  }
+  
+  // Luk menu når musen forlader panel-området
+  menuPanel.addEventListener('mouseleave', function() {
+    if (menuOpen) {
+      closeMenu();
+    }
+  });
+  
+  // Luk menu når man klikker udenfor
+  document.addEventListener('click', function(event) {
+    if (!burgerMenu.contains(event.target) && !menuPanel.contains(event.target) && menuOpen) {
+      closeMenu();
+    }
   });
   
   // Start med home page
@@ -483,6 +712,12 @@
     document.querySelectorAll('.card.newcard').forEach(function(card) {
       card.addEventListener('click', function handler() {
         if (lockBoard || flippedCards.includes(card)) return;
+        
+        // Start timer på første kort-klik
+        if (!gameStarted && selectedTime > 0) {
+          startTimer();
+        }
+        
         card.classList.add('flipped');
         flippedCards.push(card);
         if (flippedCards.length === 2) {
@@ -493,14 +728,34 @@
             const val1 = flippedCards[0].querySelector('.card-back').textContent;
             const val2 = flippedCards[1].querySelector('.card-back').textContent;
             if (val1 === val2) {
-              flippedCards.forEach(c => {
+              const matchedCards = [...flippedCards];
+              matchedCards.forEach(c => {
                 c.classList.add('matched-animate');
                 c.removeEventListener('click', handler);
               });
+              
+              // Frigiv board hurtigt så man kan spille videre
               setTimeout(function() {
-                flippedCards.forEach(c => c.classList.remove('matched-animate'));
                 flippedCards = [];
                 lockBoard = false;
+              }, 200);
+              
+              // Men lad animationen fortsætte og tjek for win
+              setTimeout(function() {
+                matchedCards.forEach(c => c.classList.remove('matched-animate'));
+                
+                // Tjek om spillet er vundet
+                const allCards = document.querySelectorAll('.card');
+                const allMatchedCards = document.querySelectorAll('.card:not(.newcard)');
+                if (allMatchedCards.length === allCards.length) {
+                  if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerRunning = false;
+                  }
+                  setTimeout(() => {
+                    alert('Tillykke! Du klarede det! 🎉');
+                  }, 500);
+                }
               }, 1000);
             } else {
               setTimeout(function() {
@@ -510,7 +765,7 @@
                 });
                 flippedCards = [];
                 lockBoard = false;
-              }, 450);
+              }, 200);
             }
           }, 310);
          }
