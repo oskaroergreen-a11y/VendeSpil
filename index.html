@@ -42,7 +42,7 @@
   color: #222;
   border: none;
   border-radius: 12px;
-  padding: 12px 32px;
+  padding: 15px 35px;
   font-size: 1.1em;
   font-family: Arial, sans-serif;
   font-weight: bold;
@@ -83,6 +83,35 @@
       50% { transform: scale(0.93); }
       100% { transform: scale(1); }
     }
+    
+    /* Dekorativ streg under Home-knappen */
+    .decorative-line {
+      position: fixed;
+      top: 88px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, #388E3C, #388E3C, #388E3C, transparent);
+      border-radius: 3px;
+      z-index: 15;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+    
+    /* Dekorativ streg i bunden */
+    .decorative-line-bottom {
+      position: fixed;
+      bottom: 88px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, #388E3C, #388E3C, #388E3C, transparent);
+      border-radius: 3px;
+      z-index: 15;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+    
     .game-wrapper {
       display: flex;
       flex-direction: column;
@@ -252,6 +281,9 @@
   </div>
   <button class="home-btn" id="homeBtn">Home</button>
   
+  <!-- Dekorativ streg -->
+  <div class="decorative-line"></div>
+  
   <!-- Timer bokse -->
   <div class="timer-container">
     <div class="timer-box">10 sek</div>
@@ -265,6 +297,9 @@
   <div class="game-wrapper" id="gameWrapper">
     <div class="container" id="cardContainer"></div>
   </div>
+  
+  <!-- Dekorativ streg i bunden -->
+  <div class="decorative-line-bottom"></div>
 
 <script>
   // Home/Start page logic
