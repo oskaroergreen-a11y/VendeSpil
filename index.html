@@ -153,35 +153,44 @@
       background-color: #5aa93a;
     }
     
-    /* Timer bokse på venstre side */
-    .timer-left-container {
+    /* Timer bokse */
+    .timer-container {
       position: fixed;
       top: 16px;
-      left: 29px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 15px;
-      z-index: 20;
+      z-index: 5;
     }
     .timer-box {
       background-color: #388E3C;
       color: #222;
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
       font-size: 1.1em;
       font-family: Arial, sans-serif;
       font-weight: bold;
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 80px;
       height: 60px;
-      padding: 0 35px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       cursor: pointer;
       transition: background 0.2s;
     }
     .timer-box:hover {
       background-color: #5aa93a;
+    }
+    
+    /* 10 sek box på venstre side */
+    .timer-box-left {
+      position: absolute;
+      top: 16px;
+      left: 29px;
+      z-index: 20;
     }
     
   /* Farver til hvert par */
@@ -292,8 +301,8 @@
   <div class="decorative-line"></div>
   
   <!-- Timer bokse -->
-  <div class="timer-left-container">
-    <div class="timer-box">10 sek</div>
+  <div class="timer-box timer-box-left">10 sek</div>
+  <div class="timer-container">
     <div class="timer-box">20 sek</div>
     <div class="timer-box">30 sek</div>
     <div class="timer-box">40 sek</div>
