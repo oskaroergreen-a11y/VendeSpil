@@ -328,6 +328,34 @@
     return array;
   }
 
+  // Funktion til at generere pæne, afdæmpede farver
+  function generateNiceColor() {
+    // Pæne, friske farver - mindre brun/mudder, mere lyse og indbydende
+    const niceColors = [
+      '#F4A6A6', // Blød lyserød
+      '#A6D4F4', // Blød lyseblå  
+      '#A6F4C4', // Blød lysegrøn
+      '#F4E4A6', // Blød gul
+      '#E4A6F4', // Blød lilla
+      '#F4C4A6', // Blød fersken
+      '#C4F4A6', // Blød lime
+      '#A6E4F4', // Blød aqua
+      '#F4A6E4', // Blød pink
+      '#D4A6F4', // Blød lavendel
+      '#A6F4D4', // Blød mint
+      '#F4D4A6', // Blød champagne
+      '#B4A6F4', // Blød perleblå
+      '#F4A6C4', // Blød rose
+      '#A6C4F4', // Blød himmelblå
+      '#E4F4A6', // Blød citron
+      '#F4A6D4', // Blød magenta
+      '#A6F4E4', // Blød turkis
+      '#D4F4A6', // Blød æble
+      '#F4C4D4'  // Blød korall
+    ];
+    return niceColors[Math.floor(Math.random() * niceColors.length)];
+  }
+
   // Generer kortene
   function renderCards() {
     // Generer 10 tilfældige tal fra 1-99
@@ -339,17 +367,29 @@
       }
     }
     
-    // Faste farver til kortparrene
-    const colors = ['pair-2', 'pair-33', 'pair-22', 'pair-55', 'pair-62', 'pair-3', 'pair-8', 'pair-7', 'pair-11', 'pair-9'];
+    // Generer 10 tilfældige pæne farver
+    const randomColors = [];
+    for (let i = 0; i < 10; i++) {
+      randomColors.push(generateNiceColor());
+    }
     
-    // Bland farverne så de skifter plads hver gang
-    const shuffledColors = shuffle([...colors]);
+    // Fjern gamle dynamiske styles
+    const oldStyle = document.getElementById('dynamic-colors');
+    if (oldStyle) oldStyle.remove();
     
-    // Opret nye kortdata med tilfældige tal og blandede farver
+    // Opret nye CSS farver
+    let dynamicCSS = '<style id="dynamic-colors">';
+    randomColors.forEach((color, index) => {
+      dynamicCSS += `.dynamic-color-${index} { background-color: ${color}; }`;
+    });
+    dynamicCSS += '</style>';
+    document.head.insertAdjacentHTML('beforeend', dynamicCSS);
+    
+    // Opret nye kortdata med tilfældige tal og farver
     const newCardData = [];
     for (let i = 0; i < randomNumbers.length; i++) {
-      newCardData.push({value: randomNumbers[i].toString(), cls: shuffledColors[i]});
-      newCardData.push({value: randomNumbers[i].toString(), cls: shuffledColors[i]}); // Par
+      newCardData.push({value: randomNumbers[i].toString(), cls: `dynamic-color-${i}`});
+      newCardData.push({value: randomNumbers[i].toString(), cls: `dynamic-color-${i}`}); // Par
     }
     
     // Bland kortenes positioner
