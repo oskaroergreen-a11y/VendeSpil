@@ -232,6 +232,12 @@
   const startBtn = document.getElementById('startBtn');
 
   function showHome() {
+    // Nulstil spillet først (samme som restart knap)
+    renderCards();
+    flippedCards = [];
+    lockBoard = false;
+    addCardListeners();
+    // Så vis home page
     homeWrapper.style.display = 'flex';
     gameWrapper.style.display = 'none';
     homeBtn.style.display = 'none';
