@@ -72,6 +72,12 @@
     .restart-btn.pressed {
       animation: pressDown 0.2s;
     }
+    .start-btn.pressed {
+      animation: pressDown 0.2s;
+    }
+    .home-btn.pressed {
+      animation: pressDown 0.2s;
+    }
     @keyframes pressDown {
       0% { transform: scale(1); }
       50% { transform: scale(0.93); }
@@ -229,8 +235,20 @@
     gameWrapper.style.display = 'flex';
     homeBtn.style.display = 'block';
   }
-  startBtn.addEventListener('click', showGame);
-  homeBtn.addEventListener('click', showHome);
+  startBtn.addEventListener('click', function() {
+    startBtn.classList.add('pressed');
+    setTimeout(function() {
+      startBtn.classList.remove('pressed');
+      showGame();
+    }, 200);
+  });
+  homeBtn.addEventListener('click', function() {
+    homeBtn.classList.add('pressed');
+    setTimeout(function() {
+      homeBtn.classList.remove('pressed');
+      showHome();
+    }, 200);
+  });
   // Start med home page
   showHome();
   // Kortdata
