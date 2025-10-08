@@ -69,9 +69,6 @@
       90% { transform: rotateZ(0deg) scale(1); }
       100% { transform: rotateZ(0deg) scale(1); }
     }
-    .restart-btn.pressed {
-      animation: pressDown 0.2s;
-    }
     .start-btn.pressed {
       animation: pressDown 0.2s;
     }
@@ -88,27 +85,6 @@
       flex-direction: column;
       align-items: center;
       width: 100vw;
-    }
-    .restart-btn {
-      display: block;
-      margin: 32px auto 24px auto;
-      padding: 0 48px;
-      height: 56px;
-      min-width: 180px;
-      width: fit-content;
-  background-color: #388E3C;
-      color: #222;
-      font-size: 2rem;
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transition: background 0.2s;
-    }
-    .restart-btn:hover {
-      background-color: #5aa93a;
     }
     .start-btn:hover {
       background-color: #5aa93a;
@@ -220,7 +196,6 @@
   </div>
   <button class="home-btn" id="homeBtn">Home</button>
   <div class="game-wrapper" id="gameWrapper">
-    <button class="restart-btn" id="restartBtn">Restart</button>
     <div class="container" id="cardContainer"></div>
   </div>
 
@@ -232,6 +207,12 @@
   const startBtn = document.getElementById('startBtn');
 
   function showHome() {
+    // Reset spillet først (samme som restart knap)
+    renderCards();
+    flippedCards = [];
+    lockBoard = false;
+    addCardListeners();
+    // Så vis home page
     homeWrapper.style.display = 'flex';
     gameWrapper.style.display = 'none';
     homeBtn.style.display = 'none';
@@ -297,19 +278,7 @@
   addCardListeners();
   // Vis home-knap kun når spillet vises
   showHome();
-  // Restart-knap funktion med tryk-animation og shuffle
-  const restartBtn = document.getElementById('restartBtn');
-  restartBtn.addEventListener('click', function() {
-    restartBtn.classList.add('pressed');
-    setTimeout(function() {
-      restartBtn.classList.remove('pressed');
-      renderCards();
-      // Nulstil spillet
-      flippedCards = [];
-      lockBoard = false;
-      addCardListeners();
-    }, 200);
-  });
+
   let flippedCards = [];
   let lockBoard = false;
 
