@@ -36,14 +36,18 @@
     }
     .home-btn {
   position: absolute;
-  top: 24px;
-  right: 32px;
+  top: 16px;
+  right: 29px;
   background: #388E3C;
   color: #222;
   border: none;
   border-radius: 12px;
-  padding: 15px 35px;
+  height: 60px;
+  padding: 0 35px;
   font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: Arial, sans-serif;
   font-weight: bold;
   cursor: pointer;
@@ -149,12 +153,11 @@
     /* Timer bokse */
     .timer-container {
       position: fixed;
-      left: 800px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: grid;
-      grid-template-columns: repeat(2, 80px);
-      grid-template-rows: repeat(3, 60px);
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: row;
       gap: 15px;
       z-index: 5;
     }
@@ -169,6 +172,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 80px;
+      height: 60px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       cursor: pointer;
       transition: background 0.2s;
@@ -243,9 +248,9 @@
     }
 
     .card-front {
-      background-color: #ffffff;
+      background-color: #388E3C;
       color: #729eb7;
-      border: 2px dashed #ffffff;
+      border: 2px dashed #388E3C;
     }
 
     .card-back {
@@ -279,7 +284,7 @@
   <h1 style="color:black; font-size:4em; margin-bottom:40px; font-family:Arial,sans-serif; font-weight:bold;">Vendespil</h1>
     <button class="start-btn" id="startBtn">Start</button>
   </div>
-  <button class="home-btn" id="homeBtn">Home</button>
+  <button class="home-btn" id="homeBtn">Hjem</button>
   
   <!-- Dekorativ streg -->
   <div class="decorative-line"></div>
@@ -386,7 +391,10 @@
       '#F4A6D4', // Blød magenta
       '#A6F4E4', // Blød turkis
       '#D4F4A6', // Blød æble
-      '#F4C4D4'  // Blød korall
+      '#F4C4D4', // Blød korall
+      '#C4A6E4', // Ekstra blød lilla
+      '#E4B4A6', // Blød brun/rosa
+      '#D4A6B4'  // Blød rød/brun
     ];
     return niceColors[Math.floor(Math.random() * niceColors.length)];
   }
