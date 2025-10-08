@@ -82,6 +82,9 @@
     .home-btn.pressed {
       animation: pressDown 0.2s;
     }
+    .timer-box.pressed {
+      animation: pressDown 0.2s;
+    }
     @keyframes pressDown {
       0% { transform: scale(1); }
       50% { transform: scale(0.93); }
@@ -150,30 +153,29 @@
       background-color: #5aa93a;
     }
     
-    /* Timer bokse */
-    .timer-container {
+    /* Timer bokse på venstre side */
+    .timer-left-container {
       position: fixed;
       top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 29px;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       gap: 15px;
-      z-index: 5;
+      z-index: 20;
     }
     .timer-box {
       background-color: #388E3C;
       color: #222;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 1.1em;
       font-family: Arial, sans-serif;
       font-weight: bold;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 80px;
       height: 60px;
+      padding: 0 35px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       cursor: pointer;
       transition: background 0.2s;
@@ -290,7 +292,7 @@
   <div class="decorative-line"></div>
   
   <!-- Timer bokse -->
-  <div class="timer-container">
+  <div class="timer-left-container">
     <div class="timer-box">10 sek</div>
     <div class="timer-box">20 sek</div>
     <div class="timer-box">30 sek</div>
@@ -343,6 +345,22 @@
       showHome();
     }, 200);
   });
+  
+  // Tilføj animation til timer-boxene
+  document.querySelectorAll('.timer-box').forEach(function(box) {
+    box.addEventListener('mousedown', function() {
+      this.classList.add('pressed');
+    });
+    box.addEventListener('mouseup', function() {
+      setTimeout(() => {
+        this.classList.remove('pressed');
+      }, 200);
+    });
+    box.addEventListener('mouseleave', function() {
+      this.classList.remove('pressed');
+    });
+  });
+  
   // Start med home page
   showHome();
   // Kortdata
