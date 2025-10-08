@@ -220,7 +220,6 @@
   </div>
   <button class="home-btn" id="homeBtn">Home</button>
   <div class="game-wrapper" id="gameWrapper">
-    <button class="restart-btn" id="restartBtn">Restart</button>
     <div class="container" id="cardContainer"></div>
   </div>
 
@@ -307,19 +306,6 @@
   addCardListeners();
   // Vis home-knap kun når spillet vises
   showHome();
-  // Restart-knap funktion med tryk-animation og shuffle
-  const restartBtn = document.getElementById('restartBtn');
-  restartBtn.addEventListener('click', function() {
-    restartBtn.classList.add('pressed');
-    setTimeout(function() {
-      restartBtn.classList.remove('pressed');
-      renderCards();
-      // Nulstil spillet
-      flippedCards = [];
-      lockBoard = false;
-      addCardListeners();
-    }, 200);
-  });
 
   function addCardListeners() {
     document.querySelectorAll('.card.newcard').forEach(function(card) {
