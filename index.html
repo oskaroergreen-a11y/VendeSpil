@@ -330,7 +330,22 @@
 
   // Generer kortene
   function renderCards() {
-    const shuffled = shuffle([...cardData]);
+    // Få alle værdierne og farverne separat
+    const values = ['2', '33', '22', '55', '62', '3', '8', '7', '11', '9'];
+    const colors = ['pair-2', 'pair-33', 'pair-22', 'pair-55', 'pair-62', 'pair-3', 'pair-8', 'pair-7', 'pair-11', 'pair-9'];
+    
+    // Bland farverne så de skifter plads hver gang
+    const shuffledColors = shuffle([...colors]);
+    
+    // Opret nye kortdata med blandede farver
+    const newCardData = [];
+    for (let i = 0; i < values.length; i++) {
+      newCardData.push({value: values[i], cls: shuffledColors[i]});
+      newCardData.push({value: values[i], cls: shuffledColors[i]}); // Par
+    }
+    
+    // Bland kortenes positioner
+    const shuffled = shuffle(newCardData);
     const container = document.getElementById('cardContainer');
     container.innerHTML = '';
     shuffled.forEach(card => {
