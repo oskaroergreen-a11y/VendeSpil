@@ -1,0 +1,172 @@
+TIMER BACKUP - Slettet fra Vendespil men gemt til senere brug
+
+=== CSS for Timer ===
+/* 10 sek box på venstre side */
+.timer-box-left {
+  position: absolute;
+  top: 15px;
+  left: 29px;
+  z-index: 20;
+}
+
+/* Timer bokse */
+.timer-container {
+  position: fixed;
+  top: 15px;
+  left: 124px;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  z-index: 20;
+}
+
+.timer-box {
+  background-color: #388E3C;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: Arial, sans-serif;
+  border: 2px solid #1B5E20;
+}
+
+.timer-box:hover {
+  background-color: #5aa93a;
+}
+
+.timer-box.selected {
+  background-color: #2E7D32;
+}
+
+.timer-stick-background {
+  position: fixed;
+  top: 24px;
+  left: 604px;
+  width: 600px;
+  height: 42px;
+  background-color: #000000;
+  border-radius: 21px;
+  z-index: 5;
+  display: none;
+}
+
+.timer-stick-foreground {
+  position: fixed;
+  top: 24px;
+  left: 604px;
+  width: 600px;
+  height: 42px;
+  background-color: #388E3C;
+  border-radius: 21px;
+  z-index: 6;
+  display: none;
+  transition: width 0.1s linear;
+}
+
+=== HTML for Timer ===
+<!-- Timer bokse -->
+<div class="timer-box timer-box-left" id="timerBoxLeft">10 sek</div>
+<div class="timer-container">
+  <div class="timer-box">20 sek</div>
+  <div class="timer-box">30 sek</div>
+  <div class="timer-box">40 sek</div>
+  <div class="timer-box">50 sek</div>
+  <div class="timer-box">60 sek</div>
+</div>
+
+<!-- Timer pinde ved siden af 60 sek -->
+<div class="timer-stick-background" id="timerStickBg"></div>
+<div class="timer-stick-foreground" id="timerStickFg"></div>
+
+=== JAVASCRIPT for Timer ===
+// Timer variabler
+let selectedTime = 0;
+let timerRunning = false;
+let timeLeft = 0;
+let timerInterval = null;
+let gameStarted = false;
+
+// Timer funktioner
+function resetTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  timerRunning = false;
+  gameStarted = false;
+  selectedTime = 0;
+  timeLeft = 0;
+  timerStickFg.style.width = '600px';
+  // Fjern selected fra alle timer-boxe
+  document.querySelectorAll('.timer-box').forEach(box => {
+    box.classList.remove('selected');
+  });
+}
+
+function startTimer(seconds) {
+  if (timerRunning) return;
+  
+  selectedTime = seconds;
+  timeLeft = seconds;
+  timerRunning = true;
+  gameStarted = true;
+  
+  // Vis timer stick
+  timerStickBg.style.display = 'block';
+  timerStickFg.style.display = 'block';
+  
+  timerInterval = setInterval(function() {
+    timeLeft -= 0.1;
+    
+    // Opdater timer stick
+    const progress = (timeLeft / selectedTime) * 600;
+    timerStickFg.style.width = Math.max(0, progress) + 'px';
+    
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerRunning = false;
+      
+      // Skjul timer stick
+      timerStickBg.style.display = 'none';
+      timerStickFg.style.display = 'none';
+      
+      alert('Tiden er løbet ud! 🕒');
+      showHome();
+    }
+  }, 100);
+}
+
+// Timer box event listeners
+document.querySelectorAll('.timer-box').forEach(function(box) {
+  box.addEventListener('mousedown', function() {
+    this.classList.add('pressed');
+    
+    // Fjern selected fra alle andre
+    document.querySelectorAll('.timer-box').forEach(b => b.classList.remove('selected'));
+    
+    // Tilføj selected til denne
+    this.classList.add('selected');
+    
+    const timeText = this.textContent;
+    const seconds = parseInt(timeText);
+    
+    startTimer(seconds);
+  });
+  
+  box.addEventListener('mouseup', function() {
+    setTimeout(() => {
+      this.classList.remove('pressed');
+    }, 200);
+  });
+  box.addEventListener('mouseleave', function() {
+    this.classList.remove('pressed');
+  });
+});
+
+// Opdater showHome() og showGame() med timer references:
+// timerBoxLeft.style.display = 'none'; (i showHome)
+// timerBoxLeft.style.display = 'flex'; (i showGame)
+// timerStickBg.style.display og timerStickFg.style.display

@@ -15,45 +15,22 @@
       justify-content: center;
       height: 100vh;
       width: 100vw;
-  background: #94A3B8;
-      position: absolute;
-      top: 0; left: 0;
-      z-index: 10;
+      background: #FFFFFF;
     }
     .start-btn {
-  background: #388E3C;
-  color: #222;
-  border: none;
-  border-radius: 12px;
-  padding: 24px 64px;
-  font-size: 2.4em;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 32px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: background 0.2s;
-    }
-    .home-btn {
-  position: absolute;
-  top: 16px;
-  right: 29px;
-  background: #388E3C;
-  color: #222;
-  border: none;
-  border-radius: 12px;
-  height: 60px;
-  padding: 0 35px;
-  font-size: 1.1em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 20;
-  display: none;
-  transition: background 0.2s;
+      background: #388E3C;
+      color: #222;
+      border: none;
+      border-radius: 12px;
+      padding: 24px 64px;
+      font-size: 2.4em;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s;
+      transform: translateY(-25px);
     }
     .matched-animate {
       animation: shakeMatch 1.3s ease-in-out;
@@ -78,39 +55,14 @@
     .start-btn.pressed {
       animation: pressDown 0.2s;
     }
-    .home-btn.pressed {
-      animation: pressDown 0.2s;
-    }
-    .timer-box.pressed {
-      animation: pressDown 0.2s;
-    }
+
+
     @keyframes pressDown {
       0% { transform: scale(1); }
       50% { transform: scale(0.93); }
       100% { transform: scale(1); }
     }
-    
-    /* Dekorativ streg under Home-knappen */
-    .decorative-line {
-      position: fixed;
-      top: 88px;
-      left: 0;
-      width: 100%;
-      height: 6px;
-      background: #000000;
-      z-index: 15;
-    }
-    
-    /* Dekorativ streg i bunden */
-    .decorative-line-bottom {
-      position: fixed;
-      bottom: 88px;
-      left: 0;
-      width: 100%;
-      height: 6px;
-      background: #000000;
-      z-index: 15;
-    }
+
     
     .game-wrapper {
       display: flex;
@@ -141,147 +93,264 @@
     .start-btn:hover {
       background-color: #5aa93a;
     }
-    .home-btn:hover {
-      background-color: #5aa93a;
-    }
-    
-    /* Timer bokse */
-    .timer-container {
+
+
+
+
+    /* Modern Topbar */
+    .topbar {
       position: fixed;
-      top: 15px;
-      left: 124px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 78px;
+      background: #FFFFFF;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       display: flex;
-      flex-direction: row;
-      gap: 15px;
-      z-index: 5;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      z-index: 1000;
+      border-bottom: 1px solid #E5E7EB;
+      box-sizing: border-box;
     }
-    .timer-box {
-      background-color: #388E3C;
-      color: #222;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1em;
-      font-family: Arial, sans-serif;
+
+    .logo {
+      font-size: 2.05rem;
       font-weight: bold;
+      color: #1F2937;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Material Design 3 Navigation */
+    .nav-buttons {
       display: flex;
-      justify-content: center;
+      gap: 12px;
       align-items: center;
-      width: 80px;
-      height: 60px;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border: 2px solid #E5E7EB;
+      border-radius: 20px;
+      background: #FFFFFF;
+      color: #1F2937;
+      font-size: 1.2rem;
+      font-family: 'Arial', sans-serif;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    .timer-box:hover {
-      background-color: #5aa93a;
+
+    .nav-btn:hover {
+      background-color: #F9FAFB;
+      border-color: #D1D5DB;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transform: translateY(-1px);
     }
-    
-    .timer-box.selected {
-      background-color: #2E7D32;
-      border: 2px solid #1B5E20;
+
+    .nav-btn:active {
+      background-color: #F3F4F6;
+      border-color: #D1D5DB;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      transform: translateY(1px);
+      transition: all 0.08s ease;
     }
-    
-    /* Burger Menu */
-    .burger-menu {
+
+    .nav-icon {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1F2937;
+    }
+
+    .info-circle {
+      width: 15px;
+      height: 15px;
+      border: 1.5px solid #6B7280;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px !important;
+      color: #6B7280 !important;
+    }
+
+    .home-icon {
+      font-size: 21px !important;
+      color: #1F2937 !important;
+      font-weight: bold !important;
+      text-shadow: 0.3px 0 0 currentColor !important;
+      transform: translateY(-1.5px) !important;
+    }
+
+    .restart-icon {
+      font-size: 18px !important;
+      font-weight: normal !important;
+      color: #1F2937 !important;
+    }
+
+    .settings-icon {
+      font-size: 18px !important;
+      font-weight: normal !important;
+      color: #1F2937 !important;
+    }
+
+    /* Adjust body for topbar */
+    body {
+      padding-top: 78px;
+    }
+
+    /* Instructions Modal */
+    .modal-overlay {
       position: fixed;
-      top: 50%;
+      top: 0;
       left: 0;
-      transform: translateY(-50%);
-      width: 60px;
-      height: 60px;
-      background-color: #F2E8D5;
-      border-radius: 0 30px 30px 0;
-      border: 2.5px solid #000000;
-      box-shadow: inset 0 0 0 2.5px #388E3C;
-      display: flex;
-      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
       justify-content: center;
       align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      z-index: 101;
-      transition: left 0.3s ease, transform 0.2s;
+      z-index: 1000;
     }
-    
-    .burger-menu.menu-open {
-      left: 355px;
+
+    .modal-content {
+      background: #FFFFFF;
+      border: 2px solid #E5E7EB;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow: hidden;
+      animation: modalSlideIn 0.3s ease-out;
     }
-    
-    .burger-menu:hover {
-      transform: translateY(-50%);
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
-    
-    .burger-line {
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 25px 15px;
+      border-bottom: 2px solid #F3F4F6;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      color: #1F2937;
+      font-family: 'Arial', sans-serif;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .modal-info-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       width: 20px;
-      height: 3px;
-      background-color: #222;
-      border-radius: 2px;
-      transition: all 0.3s ease;
+      height: 20px;
+      border: 2px solid #6B7280;
+      border-radius: 50%;
+      font-size: 12px;
+      color: #6B7280;
+      font-weight: bold;
+      margin-right: 4px;
+      vertical-align: middle;
+      transform: translateY(-1px);
     }
-    
-    /* Menu Panel */
-    .menu-panel {
-      position: fixed;
-      top: 94px;
-      left: -358px;
-      width: 358px;
-      height: calc(100vh - 188px);
-      background-color: #F2E8D5;
-      box-shadow: inset -3px 0 0 #000000;
-      z-index: 99;
-      transition: left 0.3s ease;
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #6B7280;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
     }
-    
-    .menu-panel.open {
-      left: 0;
+
+    .close-btn:hover {
+      background-color: #F3F4F6;
+      color: #1F2937;
     }
-    
-    /* 10 sek box på venstre side */
-    .timer-box-left {
-      position: absolute;
-      top: 15px;
-      left: 29px;
-      z-index: 20;
+
+    .modal-body {
+      padding: 20px 25px;
+      color: #1F2937;
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
     }
-    
-    /* Timer pinde ved siden af 60 sek */
-    .timer-stick-background {
-      position: fixed;
-      top: 24px;
-      left: 604px;
-      width: 600px;
-      height: 42px;
-      background-color: #000000;
-      border-radius: 21px;
-      z-index: 5;
-      display: none;
+
+    .modal-body p {
+      margin: 12px 0;
+      font-size: 1rem;
     }
-    
-    .timer-stick-foreground {
-      position: fixed;
-      top: 24px;
-      left: 604px;
-      width: 600px;
-      height: 42px;
-      background-color: #388E3C;
-      border-radius: 21px;
-      z-index: 6;
-      display: none;
-      transition: width 0.1s linear;
+
+    .modal-footer {
+      padding: 15px 25px 25px;
+      display: flex;
+      justify-content: flex-end;
     }
+
+    .modal-ok-btn {
+      background: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 25px;
+      font-size: 1rem;
+      font-family: 'Arial', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
+
+    .modal-ok-btn:hover {
+      background: #2563EB;
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .modal-ok-btn:active {
+      background: #1D4ED8;
+      transform: translateY(0);
+      transition: all 0.08s ease;
+    }
+
     
   /* Farver til hvert par */
-  .pair-2   { background-color: #D8A7B1; }
-  .pair-33  { background-color: #E18A7E; }
-  .pair-22  { background-color: #C85A54; }
-  .pair-55  { background-color: #A85143; }
-  .pair-62  { background-color: #D27D49; }
-  .pair-3   { background-color: #E1B55B; }
-  .pair-8   { background-color: #A5B374; }
-  .pair-7   { background-color: #8E7B9B; }
-  .pair-11  { background-color: #7C4A4D; }
-  .pair-9   { background-color: #D9C9B6; }
+  .pair-2   { background-color: #D8A7B1; border: 2px solid #B88A95; }
+  .pair-33  { background-color: #E18A7E; border: 2px solid #C66B5F; }
+  .pair-22  { background-color: #C85A54; border: 2px solid #A64439; }
+  .pair-55  { background-color: #A85143; border: 2px solid #8A3F32; }
+  .pair-62  { background-color: #D27D49; border: 2px solid #B46A34; }
+  .pair-3   { background-color: #E1B55B; border: 2px solid #C49840; }
+  .pair-8   { background-color: #A5B374; border: 2px solid #8A9A5C; }
+  .pair-7   { background-color: #8E7B9B; border: 2px solid #756282; }
+  .pair-11  { background-color: #7C4A4D; border: 2px solid #5F363A; }
+  .pair-9   { background-color: #D9C9B6; border: 2px solid #C0B09A; }
     body {
-  background-color: #F2E8D5;
+  background-color: #FFFFFF;
       /* Baggrund som dit billede */
       display: flex;
       justify-content: center;
@@ -298,7 +367,7 @@
     }
 
     .card {
-  border: 2px solid #94A3B8;
+  border: 2px solid #ffffff;
   background-color: transparent;
   width: 100px;
   height: 140px;
@@ -342,22 +411,21 @@
 
     .card-front {
       background-color: #388E3C;
-      color: #729eb7;
-      border: 2px dashed #388E3C;
+      color: #ffffff;
+      border: 2px dashed #388e3c;
     }
 
     .card-back {
   color: black;
-  border: 2px solid #94A3B8;
   transform: rotateY(180deg);
     }
 
     .newcard {
-      background-color: #94A3B8;
+      background-color: #ffffff;
       /* Lys grå for ikke-vendte kort */
       color: transparent;
       /* Skjul tallet */
-      border: 2px dashed #94A3B8;
+      border: 2px dashed #ffffff;
     }
 
     .matched {
@@ -373,75 +441,77 @@
 </head>
 
 <body>
-  <!-- Burger Menu -->
-  <div class="burger-menu" id="burgerMenu">
-    <div class="burger-line"></div>
-    <div class="burger-line"></div>
-    <div class="burger-line"></div>
-  </div>
-  
-  <!-- Slide-out Panel -->
-  <div class="menu-panel" id="menuPanel">
+  <!-- Material Design 3 Topbar -->
+  <div class="topbar">
+    <div class="logo">Vendespil</div>
+    <div class="nav-buttons">
+      <button class="nav-btn" id="homeNavBtn" onclick="showHome()">
+        <span class="nav-icon home-icon">⌂</span>
+        Hjem
+      </button>
+      <button class="nav-btn" id="restartNavBtn" onclick="restartGame()">
+        <span class="nav-icon restart-icon">↻</span>
+        Genstart
+      </button>
+      <button class="nav-btn" onclick="showInstructions()">
+        <span class="nav-icon info-circle">i</span>
+        Instruktioner
+      </button>
+      <button class="nav-btn" id="settingsNavBtn" onclick="showSettings()">
+        <span class="nav-icon settings-icon">⚙</span>
+        Indstillinger
+      </button>
+    </div>
   </div>
   
   <div class="home-wrapper" id="homeWrapper">
-  <h1 style="color:black; font-size:4em; margin-bottom:40px; font-family:Arial,sans-serif; font-weight:bold;">Vendespil</h1>
     <button class="start-btn" id="startBtn">Start</button>
   </div>
-  <button class="home-btn" id="homeBtn">Hjem</button>
-  
-  <!-- Dekorativ streg -->
-  <div class="decorative-line"></div>
-  
-  <!-- Timer bokse -->
-  <div class="timer-box timer-box-left" id="timerBoxLeft">10 sek</div>
-  <div class="timer-container">
-    <div class="timer-box">20 sek</div>
-    <div class="timer-box">30 sek</div>
-    <div class="timer-box">40 sek</div>
-    <div class="timer-box">50 sek</div>
-    <div class="timer-box">60 sek</div>
-  </div>
-  
-  <!-- Timer pinde ved siden af 60 sek -->
-  <div class="timer-stick-background" id="timerStickBg"></div>
-  <div class="timer-stick-foreground" id="timerStickFg"></div>
   
   <div class="game-wrapper" id="gameWrapper">
     <div class="container" id="cardContainer"></div>
   </div>
-  
-  <!-- Dekorativ streg i bunden -->
-  <div class="decorative-line-bottom"></div>
+
+  <!-- Instructions Modal -->
+  <div class="modal-overlay" id="instructionsModal" onclick="closeInstructions()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h2><span class="modal-info-icon">i</span> Instruktioner</h2>
+        <button class="close-btn" onclick="closeInstructions()">×</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>1.</strong> Klik "Start" for at begynde</p>
+        <p><strong>2.</strong> Vend kortene ved at klikke på dem</p>
+        <p><strong>3.</strong> Find alle matchende par</p>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-ok-btn" onclick="closeInstructions()">OK</button>
+      </div>
+    </div>
+  </div>
 
 <script>
   // Home/Start page logic
   const homeWrapper = document.getElementById('homeWrapper');
   const gameWrapper = document.getElementById('gameWrapper');
-  const homeBtn = document.getElementById('homeBtn');
+
   const startBtn = document.getElementById('startBtn');
-  const timerBoxLeft = document.getElementById('timerBoxLeft');
-  const timerStickBg = document.getElementById('timerStickBg');
-  const timerStickFg = document.getElementById('timerStickFg');
-  const burgerMenu = document.getElementById('burgerMenu');
-  const menuPanel = document.getElementById('menuPanel');
   
-  // Timer variabler
-  let selectedTime = 0;
-  let timerRunning = false;
-  let timeLeft = 0;
-  let timerInterval = null;
-  let gameStarted = false;
+  // Topbar elements
+  const homeNavBtn = document.getElementById('homeNavBtn');
+  const restartNavBtn = document.getElementById('restartNavBtn');
+  const settingsNavBtn = document.getElementById('settingsNavBtn');
+  
+
 
   function showHome() {
     homeWrapper.style.display = 'flex';
     gameWrapper.style.display = 'none';
-    homeBtn.style.display = 'none';
-    timerBoxLeft.style.display = 'none';
-    timerStickBg.style.display = 'none';
-    timerStickFg.style.display = 'none';
-    // Reset timer
-    resetTimer();
+
+    // Hide nav buttons when on home page
+    homeNavBtn.style.display = 'none';
+    restartNavBtn.style.display = 'none';
+    settingsNavBtn.style.display = 'none';
   }
   function showGame() {
     // Reset spillet først for at sikre nyt spil
@@ -452,9 +522,11 @@
     // Så vis spillet
     homeWrapper.style.display = 'none';
     gameWrapper.style.display = 'flex';
-    homeBtn.style.display = 'block';
-    timerBoxLeft.style.display = 'flex';
-    gameStarted = false;
+
+    // Show nav buttons when in game
+    homeNavBtn.style.display = 'flex';
+    restartNavBtn.style.display = 'flex';
+    settingsNavBtn.style.display = 'flex';
   }
   startBtn.addEventListener('click', function() {
     startBtn.classList.add('pressed');
@@ -463,140 +535,26 @@
       showGame();
     }, 200);
   });
-  homeBtn.addEventListener('click', function() {
-    homeBtn.classList.add('pressed');
-    setTimeout(function() {
-      homeBtn.classList.remove('pressed');
-      showHome();
-    }, 200);
-  });
+
   
-  // Tilføj animation til timer-boxene
-  document.querySelectorAll('.timer-box').forEach(function(box) {
-    box.addEventListener('mousedown', function() {
-      this.classList.add('pressed');
-    });
-    box.addEventListener('mouseup', function() {
-      setTimeout(() => {
-        this.classList.remove('pressed');
-      }, 200);
-    });
-    box.addEventListener('mouseleave', function() {
-      this.classList.remove('pressed');
-    });
-  });
-  
-  // Timer funktioner
-  function resetTimer() {
-    if (timerInterval) {
-      clearInterval(timerInterval);
-      timerInterval = null;
+  // Menu functions
+  function restartGame() {
+    if (gameWrapper.style.display !== 'none') {
+      showGame(); // This will restart the current game
     }
-    timerRunning = false;
-    gameStarted = false;
-    selectedTime = 0;
-    timeLeft = 0;
-    timerStickFg.style.width = '600px';
-    // Fjern selected fra alle timer-boxe
-    document.querySelectorAll('.timer-box').forEach(box => {
-      box.classList.remove('selected');
-    });
   }
-  
-  function selectTimer(seconds) {
-    resetTimer();
-    selectedTime = seconds;
-    timeLeft = seconds;
-    // Highlight den valgte timer
-    document.querySelectorAll('.timer-box').forEach(box => {
-      box.classList.remove('selected');
-    });
-    event.target.classList.add('selected');
+
+  function showInstructions() {
+    document.getElementById('instructionsModal').style.display = 'flex';
   }
-  
-  function startTimer() {
-    if (selectedTime === 0 || timerRunning) return;
-    
-    timerRunning = true;
-    gameStarted = true;
-    timerStickBg.style.display = 'block';
-    timerStickFg.style.display = 'block';
-    
-    timerInterval = setInterval(() => {
-      timeLeft -= 0.1;
-      const percentage = (timeLeft / selectedTime) * 100;
-      timerStickFg.style.width = Math.max(0, percentage * 6) + 'px';
-      
-      if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        timerRunning = false;
-        alert('Tiden er udløbet! 🕒');
-        // Reset spillet
-        showHome();
-      }
-    }, 100);
+
+  function closeInstructions() {
+    document.getElementById('instructionsModal').style.display = 'none';
   }
-  
-  // Tilføj klik events til timer-boxe
-  document.querySelectorAll('.timer-box').forEach(box => {
-    box.addEventListener('click', function(event) {
-      const text = this.textContent;
-      const seconds = parseInt(text);
-      selectTimer(seconds);
-    });
-  });
-  
-  // Burger Menu funktionalitet
-  let menuOpen = false;
-  
-  burgerMenu.addEventListener('click', function() {
-    menuOpen = !menuOpen;
-    
-    if (menuOpen) {
-      menuPanel.classList.add('open');
-      burgerMenu.classList.add('menu-open');
-    } else {
-      menuPanel.classList.remove('open');
-      burgerMenu.classList.remove('menu-open');
-    }
-    
-    // Animér burger linjer - fold til 1 streg
-    const lines = this.querySelectorAll('.burger-line');
-    if (menuOpen) {
-      lines[0].style.transform = 'translateY(9px)';
-      lines[1].style.transform = 'none';
-      lines[2].style.transform = 'translateY(-9px)';
-    } else {
-      lines[0].style.transform = 'none';
-      lines[1].style.transform = 'none';
-      lines[2].style.transform = 'none';
-    }
-  });
-  
-  // Funktion til at lukke menu
-  function closeMenu() {
-    menuOpen = false;
-    menuPanel.classList.remove('open');
-    burgerMenu.classList.remove('menu-open');
-    const lines = burgerMenu.querySelectorAll('.burger-line');
-    lines[0].style.transform = 'none';
-    lines[1].style.transform = 'none';
-    lines[2].style.transform = 'none';
+
+  function showSettings() {
+    alert('⚙️ Indstillinger kommer snart!');
   }
-  
-  // Luk menu når musen forlader panel-området
-  menuPanel.addEventListener('mouseleave', function() {
-    if (menuOpen) {
-      closeMenu();
-    }
-  });
-  
-  // Luk menu når man klikker udenfor
-  document.addEventListener('click', function(event) {
-    if (!burgerMenu.contains(event.target) && !menuPanel.contains(event.target) && menuOpen) {
-      closeMenu();
-    }
-  });
   
   // Start med home page
   showHome();
@@ -654,6 +612,25 @@
     return niceColors[Math.floor(Math.random() * niceColors.length)];
   }
 
+  // Funktion til at gøre en farve mørkere
+  function darkenColor(color, amount) {
+    // Fjern # hvis den er der
+    color = color.replace('#', '');
+    
+    // Konverter til RGB
+    const r = parseInt(color.substring(0, 2), 16);
+    const g = parseInt(color.substring(2, 4), 16);
+    const b = parseInt(color.substring(4, 6), 16);
+    
+    // Gør mørkere
+    const newR = Math.round(r * (1 - amount));
+    const newG = Math.round(g * (1 - amount));
+    const newB = Math.round(b * (1 - amount));
+    
+    // Konverter tilbage til hex
+    return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+  }
+
   // Generer kortene
   function renderCards() {
     // Generer 10 tilfældige tal fra 1-99
@@ -675,10 +652,12 @@
     const oldStyle = document.getElementById('dynamic-colors');
     if (oldStyle) oldStyle.remove();
     
-    // Opret nye CSS farver
+    // Opret nye CSS farver med mørkere borders
     let dynamicCSS = '<style id="dynamic-colors">';
     randomColors.forEach((color, index) => {
-      dynamicCSS += `.dynamic-color-${index} { background-color: ${color}; }`;
+      // Konverter hex til RGB og gør mørkere for border
+      const darkerColor = darkenColor(color, 0.2); // 20% mørkere
+      dynamicCSS += `.dynamic-color-${index} { background-color: ${color}; border: 2px solid ${darkerColor}; }`;
     });
     dynamicCSS += '</style>';
     document.head.insertAdjacentHTML('beforeend', dynamicCSS);
@@ -714,10 +693,7 @@
       card.addEventListener('click', function handler() {
         if (lockBoard || flippedCards.includes(card)) return;
         
-        // Start timer på første kort-klik
-        if (!gameStarted && selectedTime > 0) {
-          startTimer();
-        }
+
         
         card.classList.add('flipped');
         flippedCards.push(card);
