@@ -12,35 +12,73 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      height: calc(100vh - 78px);
       width: 100vw;
       background: #FFFFFF;
+      overflow: hidden;
     }
     .start-btn {
       background: 
         linear-gradient(135deg, 
-          rgba(56, 142, 60, 0.9) 0%,
-          rgba(76, 175, 80, 0.95) 50%,
-          rgba(56, 142, 60, 0.9) 100%),
-        rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 20px;
-      padding: 24px 64px;
-      font-size: 2.4em;
+          rgba(244, 166, 166, 0.75) 0%, 
+          rgba(166, 212, 244, 0.68) 16%, 
+          rgba(166, 244, 196, 0.72) 32%, 
+          rgba(244, 228, 166, 0.82) 48%, 
+          rgba(228, 166, 244, 0.65) 64%,
+          rgba(244, 196, 166, 0.78) 80%,
+          rgba(244, 166, 166, 0.75) 100%),
+        rgba(255, 255, 255, 0.25);
+      background-size: 400% 400%;
+      animation: 
+        liquidFlow 15s ease-in-out infinite,
+        colorShift 20s ease-in-out infinite;
+      color: #1F2937;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-radius: 28px;
+      padding: 32px 80px;
+      font-size: 2.8em;
       font-family: Arial, sans-serif;
       font-weight: bold;
       cursor: pointer;
       margin-top: 32px;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(30px) saturate(180%);
       box-shadow: 
-        0 8px 32px rgba(56, 142, 60, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+        0 20px 80px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.3),
+        0 8px 32px rgba(255, 255, 255, 0.1);
       transition: all 0.3s ease;
       margin-bottom: 25px;
       position: relative;
       overflow: hidden;
+    }
+
+    .start-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 28px;
+      background: 
+        linear-gradient(135deg, 
+          rgba(244, 166, 166, 0.15) 0%, 
+          rgba(166, 212, 244, 0.12) 16%, 
+          rgba(166, 244, 196, 0.15) 32%, 
+          rgba(244, 228, 166, 0.18) 48%, 
+          rgba(228, 166, 244, 0.12) 64%,
+          rgba(244, 196, 166, 0.15) 80%,
+          rgba(244, 166, 166, 0.15) 100%),
+        rgba(255, 255, 255, 0.1);
+      background-size: 400% 400%;
+      animation: 
+        liquidFlow 12s ease-in-out infinite,
+        colorShift 16s ease-in-out infinite;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
     }
 
     .start-btn::before {
@@ -106,6 +144,10 @@
       flex-direction: column;
       align-items: center;
       width: 100vw;
+      height: calc(100vh - 78px);
+      overflow: hidden;
+      position: relative;
+      justify-content: center;
     }
     .restart-btn {
       display: block;
@@ -176,6 +218,12 @@
         inset 0 -1px 0 rgba(255, 255, 255, 0.2);
     }
 
+    .restart-btn:hover::before {
+      background-size: 700% 700%;
+      animation: colorSnake 5s linear infinite;
+      opacity: 0.8;
+    }
+
     .restart-btn:active {
       background: 
         linear-gradient(135deg, 
@@ -190,30 +238,43 @@
       transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .start-btn:hover {
-      background: 
-        linear-gradient(135deg, 
-          rgba(76, 175, 80, 0.95) 0%,
-          rgba(102, 187, 106, 1) 50%,
-          rgba(76, 175, 80, 0.95) 100%),
-        rgba(255, 255, 255, 0.15);
+      background-size: 800% 800%;
+      animation: 
+        liquidFlow 8s ease-in-out infinite,
+        colorShift 10s ease-in-out infinite;
       transform: scale(1.02);
       box-shadow: 
-        0 12px 40px rgba(56, 142, 60, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+        0 24px 100px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.4),
+        0 12px 48px rgba(255, 255, 255, 0.2);
+    }
+
+    .start-btn:hover::after {
+      background-size: 800% 800%;
+      animation: 
+        liquidFlow 6s ease-in-out infinite,
+        colorShift 8s ease-in-out infinite;
+      opacity: 1;
     }
 
     .start-btn:active {
       background: 
         linear-gradient(135deg, 
-          rgba(46, 125, 50, 1) 0%,
-          rgba(67, 160, 71, 1) 50%,
-          rgba(46, 125, 50, 1) 100%),
-        rgba(255, 255, 255, 0.05);
+          rgba(244, 166, 166, 0.6) 0%, 
+          rgba(166, 212, 244, 0.53) 16%, 
+          rgba(166, 244, 196, 0.57) 32%, 
+          rgba(244, 228, 166, 0.67) 48%, 
+          rgba(228, 166, 244, 0.5) 64%,
+          rgba(244, 196, 166, 0.63) 80%,
+          rgba(244, 166, 166, 0.6) 100%),
+        rgba(255, 255, 255, 0.15);
       transform: scale(0.98);
       box-shadow: 
-        0 6px 20px rgba(56, 142, 60, 0.5),
-        inset 0 3px 6px rgba(0, 0, 0, 0.2);
+        0 10px 40px rgba(0, 0, 0, 0.2),
+        inset 0 3px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
       transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -253,6 +314,7 @@
       z-index: 1000;
       box-sizing: border-box;
       border-radius: 0;
+      overflow: visible;
       transition: all 0.3s ease;
     }
 
@@ -329,6 +391,7 @@
       display: flex;
       gap: 12px;
       align-items: center;
+      overflow: visible;
     }
 
     .nav-btn {
@@ -354,6 +417,12 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+    }
+
+    /* Slightly wider settings button: +3px on each side */
+    #settingsNavBtn {
+      padding-left: 26px; /* increased by 3px more */
+      padding-right: 26px;
     }
 
     .nav-btn::before {
@@ -399,6 +468,26 @@
       transform: translateY(-2px);
     }
 
+    .dropdown-btn.active {
+      background: 
+        linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.38) 0%,
+          rgba(255, 255, 255, 0.55) 100%),
+        rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .dropdown-btn.active .nav-icon {
+      transform: rotate(-8deg) translateY(-1px);
+      transition: transform 220ms ease;
+    }
+
+    .nav-btn:hover::before {
+      background-size: 600% 600%;
+      animation: colorSnake 4s linear infinite;
+      opacity: 0.8;
+    }
+
     .nav-btn:active {
       background: 
         linear-gradient(135deg, 
@@ -411,6 +500,345 @@
         inset 0 2px 4px rgba(0, 0, 0, 0.1);
       transform: translateY(2px) scale(0.98);
       transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dropdown Button Styles */
+    .dropdown-btn {
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: stretch;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 14px;
+  min-width: 0;
+  max-width: 200px;
+  font-size: 1.2rem;
+  height: 56px;
+  border-radius: 20px;
+  padding: 12px 18px 10px 18px;
+    }
+
+    .dropdown-btn.active {
+  border-radius: 14px;
+  padding-bottom: 0;
+    }
+
+    .button-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  min-height: 0;
+  position: relative;
+  top: 2px;
+    }
+
+    .dropdown-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 0;
+    }
+
+    .dropdown-btn.active .dropdown-content {
+  max-height: 180px;
+  opacity: 1;
+  padding: 14px 16px;
+    }
+
+    .dropdown-content h3 {
+      margin: 0 0 12px 0;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 15px;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .dropdown-content ul {
+      margin: 0;
+      padding-left: 0;
+      list-style-type: none;
+    }
+
+    .dropdown-content li {
+      margin: 6px 0;
+      padding-left: 12px;
+      position: relative;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .dropdown-content li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 11px;
+    }
+
+    .dropdown-content p {
+      margin: 8px 0 0 0;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.3;
+    }
+
+    /* Right-side panel styling */
+    .side-panel {
+      position: fixed;
+      right: 18px;
+      top: 78px; /* start right below topbar */
+      height: calc(100vh - 96px); /* extend nearly full height */
+      width: 360px;
+      max-width: calc(45vw);
+      /* copy nav-btn look */
+      background: 
+        linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.25) 0%,
+          rgba(255, 255, 255, 0.35) 100%),
+        rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: #1F2937;
+      border-radius: 20px;
+      box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      transform: translateX(120%);
+      opacity: 0;
+      transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+      z-index: 1200;
+      pointer-events: none;
+    }
+
+    .side-panel[aria-hidden="false"] {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .side-panel-inner {
+      padding: 18px 18px 20px 18px;
+      color: #1F2937;
+      font-family: 'Arial', sans-serif;
+      font-size: 15px;
+    }
+
+    
+
+    .settings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+      align-items: flex-start; /* left-align buttons */
+      max-height: calc(100% - 80px);
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    /* Two-column settings layout for presets + extra buttons */
+    .settings-grid {
+      display: flex;
+      gap: 16px;
+      align-items: center; /* center columns vertically so right column mirrors left */
+      margin-top: 10px;
+    }
+
+    .settings-col-left, .settings-col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+  .settings-col-left { flex: 1 1 60%; }
+  .settings-col-right { flex: 0 0 40%; margin-left: 6px; transform: translateY(-155px); }
+
+    .settings-list .preset-btn {
+      justify-content: center;
+      padding: 12px 14px;
+      font-size: 1rem;
+      border-radius: 14px;
+      width: 100%; /* fill the column width */
+      /* thin glass / pale white look, no animations */
+      background: linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%);
+      border: 1px solid rgba(255,255,255,0.6);
+      color: #1F2937;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: none !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .settings-col-right .preset-btn {
+      justify-content: center;
+      padding: 12px 14px;
+      font-size: 1rem;
+      border-radius: 14px;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%);
+      border: 1px solid rgba(255,255,255,0.6);
+      color: #1F2937;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: none !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .side-panel h3 {
+      margin-top: 2px;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      color: #1F2937;
+    }
+    /* Preset timer buttons container (bottom of game page) */
+    .preset-buttons {
+      position: absolute; /* positioned inside .game-wrapper */
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 18px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      z-index: 1100;
+      pointer-events: auto;
+      overflow-x: auto;
+      max-width: calc(100% - 40px);
+    }
+
+    .preset-buttons .preset-btn {
+      min-width: 72px;
+      padding: 8px 12px;
+      font-size: 0.95rem;
+      border-radius: 16px;
+      /* match settings-list preset look: thin glass, no shadow */
+      background: linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%);
+      border: 1px solid rgba(255,255,255,0.6);
+      color: #1F2937;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: none;
+    }
+
+    /* Long glass pin at bottom of game area */
+    .long-pin {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 83px; /* moved up 10px from previous 73px */
+      width: min(880px, 88%);
+      max-width: 1100px;
+      height: 64px; /* semi-thick */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 36px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 100%), rgba(255,255,255,0.04);
+      color: #1F2937;
+      border: 2px solid rgba(255,255,255,0.35);
+      backdrop-filter: blur(12px) saturate(130%);
+      -webkit-backdrop-filter: blur(12px) saturate(130%);
+      cursor: pointer;
+      z-index: 1200;
+      overflow: visible;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .long-pin:hover {
+      transform: translateX(-50%) translateY(-2px) scale(1.01);
+    }
+
+    /* Animated rim like nav-btn::before */
+    .long-pin::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      border-radius: 40px;
+      background: linear-gradient(45deg, rgba(244,166,166,0.45) 0%, rgba(166,212,244,0.45) 25%, rgba(166,244,196,0.45) 50%, rgba(244,228,166,0.55) 75%, rgba(228,166,244,0.45) 100%);
+      background-size: 300% 300%;
+      animation: colorSnake 8s linear infinite;
+      opacity: 0.75;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* removed visible pin label per request */
+
+    /* hourglass / timer track inside the pin */
+    .long-pin .timer-track {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      height: 24px; /* enlarged track */
+      bottom: 18px; /* moved down 10px from 28px */
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.12);
+      overflow: hidden;
+      display: block;
+      z-index: 1;
+    }
+
+    .long-pin .timer-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%; /* will shrink as timer runs */
+      background: rgba(0,0,0,0.12); /* visible when timer active; will change opacity */
+      transition: width 250ms linear, background-color 250ms linear, opacity 250ms linear;
+      z-index: 0;
+      backdrop-filter: blur(6px);
+    }
+
+    .long-pin .timer-label {
+      position: absolute;
+      right: 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      z-index: 2;
+      color: #1F2937;
+    }
+
+    /* ensure the animated rim shows on preset buttons too - no override needed */
+
+    /* panel close removed — panels are toggled via the button */
+
+    /* Animated rim on side panels to match nav buttons */
+    .side-panel::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      border-radius: 24px;
+      background: 
+        linear-gradient(45deg, 
+          rgba(244, 166, 166, 0.4) 0%, 
+          rgba(166, 212, 244, 0.4) 25%, 
+          rgba(166, 244, 196, 0.4) 50%, 
+          rgba(244, 228, 166, 0.5) 75%, 
+          rgba(228, 166, 244, 0.4) 100%);
+      background-size: 300% 300%;
+      animation: colorSnake 8s linear infinite;
+      opacity: 0.75;
+      z-index: -1;
     }
 
     .nav-icon {
@@ -449,13 +877,22 @@
       font-size: 21px !important;
       font-weight: normal !important;
       color: #1F2937 !important;
-      transform: translateY(-1px) !important;
+      transform: translate(-15px, -1px) !important;
     }
 
-    /* Clean background */
+    /* Clean background - No scrolling */
     body {
       padding-top: 78px;
       background: #ffffff;
+      height: 100vh;
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+    }
+
+    html {
+      height: 100vh;
+      overflow: hidden;
     }
 
     /* Instructions Modal */
@@ -501,6 +938,33 @@
       animation: modalFadeIn 0.6s ease-out;
       opacity: 0;
       transform: scale(0.9);
+      position: relative;
+    }
+
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 32px;
+      background: 
+        linear-gradient(135deg, 
+          rgba(244, 166, 166, 0.9) 0%, 
+          rgba(166, 212, 244, 0.8) 16%, 
+          rgba(166, 244, 196, 0.9) 32%, 
+          rgba(244, 228, 166, 1) 48%, 
+          rgba(228, 166, 244, 0.8) 64%,
+          rgba(244, 196, 166, 0.9) 80%,
+          rgba(244, 166, 166, 0.9) 100%),
+        rgba(255, 255, 255, 0.3);
+      background-size: 400% 400%;
+      animation: 
+        liquidFlow 15s ease-in-out infinite,
+        colorShift 20s ease-in-out infinite;
+      z-index: -1;
+      opacity: 0;
     }
 
     .modal-content.show {
@@ -508,6 +972,10 @@
       transform: scale(1);
       transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
+
+    .modal-content.show::before {
+      opacity: 1;
+      transition: opacity 0.8s ease 0.2s;
     }
 
     @keyframes modalFadeIn {
@@ -681,34 +1149,125 @@
     }
 
     .container {
-      display: grid;
-      grid-template-columns: repeat(5, 100px);
-      grid-template-rows: repeat(4, 140px);
-      gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 120px);
+  grid-template-rows: repeat(4, 168px);
+  gap: 24px;
+  /* max-height og overflow fjernet for at undgå cut af kort */
     }
 
     .card {
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background-color: transparent;
-  width: 100px;
-  height: 140px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: #1F2937;
+      border-radius: 20px;
+      /* shadows removed from cards for a flatter look */
+      box-shadow: none;
+  height: 168px;
   perspective: 600px;
   position: relative;
   display: inline-block;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border-radius: 28px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  backdrop-filter: blur(10px);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  /* make room for animated outline */
+  overflow: visible;
+    }
+
+    /* Animated outline for the front face of each card.
+       Putting the outline on .card-front::before ensures it flips with the face
+       (no floating copy behind the card). */
+    .card-front {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 64px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      backface-visibility: hidden;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 2;
+      overflow: visible;
+    }
+
+    .card-front::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      z-index: 1;
+      border-radius: 28px;
+      background: 
+        linear-gradient(135deg, 
+          rgba(244, 166, 166, 1) 0%, 
+          rgba(166, 212, 244, 1) 16%, 
+          rgba(166, 244, 196, 0.98) 32%, 
+          rgba(244, 228, 166, 1) 48%, 
+          rgba(228, 166, 244, 0.98) 64%,
+          rgba(244, 196, 166, 1) 80%,
+          rgba(244, 166, 166, 1) 100%);
+      background-size: 400% 400%;
+      animation: 
+        liquidFlow 15s ease-in-out infinite,
+        colorShift 20s ease-in-out infinite;
+      filter: blur(2px);
+      opacity: 0.85;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      transition: opacity 300ms ease, filter 300ms ease;
+      box-shadow: none;
+    }
+
+    /* When a card is flipped, hide the front outline so it fully retracts */
+    .card.flipped .card-front::before {
+      opacity: 0 !important;
+      filter: blur(12px) !important;
+      transform: scale(0.98);
+      transition: opacity 220ms ease, filter 220ms ease, transform 220ms ease;
+      pointer-events: none;
+    }
+
+    /* Ensure the back face covers the outline when visible */
+    .card-back {
+      z-index: 3;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backface-visibility: hidden;
+      border-radius: 28px;
+    }
+
+    /* Ensure front/back content sits above the outline */
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 64px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      backface-visibility: hidden;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 2;
     }
     
     .card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 
-        0 12px 40px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px) scale(1.03);
+      background: 
+        linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.18) 0%,
+          rgba(255, 255, 255, 0.1) 100%);
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: none;
     }
 
     .card-inner {
@@ -734,35 +1293,42 @@
       font-family: Arial, sans-serif;
       font-weight: bold;
       backface-visibility: hidden;
-      border-radius: 8px;
+  border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .card-front {
-      background: 
-        linear-gradient(135deg, 
-          rgba(56, 142, 60, 0.85) 0%,
-          rgba(76, 175, 80, 0.9) 50%,
-          rgba(56, 142, 60, 0.85) 100%),
-        rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(8px);
-      box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+      /* Use page background so inner card looks like the page (no duplicate tint)
+         Keep subtle border and no inset shine. */
+      background: #ffffff; /* same as page background */
+      color: #1F2937;
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      border-radius: 28px;
+      box-shadow: none;
+      transition: all 0.25s ease;
+      z-index: 2;
     }
 
     .card-back {
-  color: black;
-  transform: rotateY(180deg);
+      background: 
+        linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.25) 0%,
+          rgba(255, 255, 255, 0.15) 100%);
+      color: rgba(0, 0, 0, 0.8);
+      transform: rotateY(180deg);
+      backdrop-filter: blur(6px);
+      box-shadow: none;
     }
 
     .newcard {
-      background-color: #ffffff;
-      /* Lys grå for ikke-vendte kort */
+      background: 
+        linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.3) 0%,
+          rgba(255, 255, 255, 0.18) 100%);
       color: transparent;
-      /* Skjul tallet */
-      border: 2px dashed #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      box-shadow: none;
     }
 
     .matched {
@@ -845,7 +1411,7 @@
       .nav-btn {
         padding: 6px 8px;
         font-size: 0.8rem;
-        border-radius: 15px;
+    border-radius: 28px;
       }
       
       .nav-btn span {
@@ -881,7 +1447,7 @@
       .modal-content {
         width: 98%;
         margin: 10px;
-        border-radius: 15px;
+    border-radius: 28px;
       }
       
       .modal-header {
@@ -953,23 +1519,82 @@
         <span class="nav-icon restart-icon">↻</span>
         Genstart
       </button>
-      <button class="nav-btn" id="instructionsNavBtn" onclick="showInstructions()">
-        <span class="nav-icon info-circle">i</span>
-        Instruktioner
+      <button class="nav-btn dropdown-btn" id="instructionsNavBtn" onclick="toggleDropdown('instructions')">
+        <div class="button-header">
+          <span class="nav-icon info-circle">i</span>
+          Instruktioner
+        </div>
       </button>
-      <button class="nav-btn" id="settingsNavBtn" onclick="showSettings()">
-        <span class="nav-icon settings-icon">⚙</span>
-        Indstillinger
+      <button class="nav-btn dropdown-btn" id="settingsNavBtn" onclick="toggleDropdown('settings')">
+        <div class="button-header">
+          <span class="nav-icon settings-icon">⚙</span>
+          spil_instillinger
+        </div>
       </button>
     </div>
   </div>
   
+  <!-- Right-side panels (hidden by default) -->
+  <aside class="side-panel" id="instructionsPanel" aria-hidden="true">
+    <div class="side-panel-inner">
+      <h3>Sådan spiller du:</h3>
+      <ul>
+        <li>Klik på kort for at vende dem</li>
+        <li>Find matchende par</li>
+        <li>Husk hvor kortene er placeret</li>
+        <li>Match alle par for at vinde!</li>
+      </ul>
+      <p><strong>Tip:</strong> Brug din hukommelse til at huske kortenes placering efter du har vendt dem.</p>
+    </div>
+  </aside>
+
+  <aside class="side-panel" id="settingsPanel" aria-hidden="true">
+    <div class="side-panel-inner">
+  <h3>spil_instillinger</h3>
+      <div class="settings-grid">
+        <div class="settings-col-left">
+          <div class="settings-list" id="settingsList">
+            <button class="nav-btn preset-btn" data-seconds="10">10 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="20">20 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="30">30 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="40">40 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="50">50 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="60">60 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="70">70 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="80">80 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="90">90 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="100">100 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="110">110 sek</button>
+            <button class="nav-btn preset-btn" data-seconds="120">120 sek</button>
+          </div>
+        </div>
+        <div class="settings-col-right">
+          <button class="nav-btn preset-btn" data-seconds="5">5 kort</button>
+          <button class="nav-btn preset-btn" data-seconds="10">10 kort</button>
+          <button class="nav-btn preset-btn" data-seconds="20">20 kort</button>
+          <button class="nav-btn preset-btn" data-seconds="30">30 kort</button>
+          <button class="nav-btn preset-btn" data-seconds="40">40 kort</button>
+          <button class="nav-btn preset-btn" data-seconds="50">50 kort</button>
+        </div>
+      </div>
+      
+      
+    </div>
+  </aside>
+
   <div class="home-wrapper" id="homeWrapper" style="display: flex;">
     <button class="start-btn" id="startBtn">Start</button>
   </div>
   
   <div class="game-wrapper" id="gameWrapper" style="display: none;">
     <div class="container" id="cardContainer"></div>
+    
+    <!-- Long hourglass/timer pin button at bottom of game area -->
+    <button class="long-pin" id="longPinBtn" aria-label="Timer">
+      <div class="timer-track" aria-hidden="true">
+        <div class="timer-fill" id="timerFill"></div>
+      </div>
+    </button>
   </div>
 
   <!-- Instructions Modal -->
@@ -991,14 +1616,16 @@
   <div class="modal-overlay" id="settingsModal" onclick="closeSettings()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h2><span class="modal-settings-icon">⚙</span> Indstillinger</h2>
+  <h2><span class="modal-settings-icon">⚙</span> spil_instillinger</h2>
         <button class="close-btn" onclick="closeSettings()">×</button>
       </div>
       <div class="modal-body" id="settingsModalBody">
-        <p><strong>Sværhedsgrad:</strong> Normal</p>
-        <p><strong>Lyd:</strong> Til</p>
-        <p><strong>Animation:</strong> Til</p>
-        <p><strong>Tema:</strong> Liquid Glass</p>
+        <div style="text-align: center; padding: 20px;">
+          <h3 style="color: rgba(255, 255, 255, 0.95); margin-bottom: 15px;">Arbejde i gang</h3>
+          <p style="color: rgba(255, 255, 255, 0.8); font-size: 16px; line-height: 1.5;">
+            Vi arbejder på at forbedre spillet med nye funktioner og indstillinger.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -1015,6 +1642,111 @@
   const restartNavBtn = document.getElementById('restartNavBtn');
   const settingsNavBtn = document.getElementById('settingsNavBtn');
   const instructionsNavBtn = document.getElementById('instructionsNavBtn');
+
+  // Settings panel selection (seconds presets)
+  let selectedSettingSeconds = null;
+  const settingsGrid = document.querySelector('.settings-grid');
+  if (settingsGrid) {
+    settingsGrid.addEventListener('click', function(e) {
+      const btn = e.target.closest('.preset-btn');
+      if (!btn) return;
+  // remove active from all preset-btns inside the grid
+  settingsGrid.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+      const seconds = Number(btn.getAttribute('data-seconds')) || null;
+      // mark matching button in #settingsList if exists
+  const match = document.querySelector(`#settingsList .preset-btn[data-seconds="${seconds}"]`);
+  if (match) match.classList.add('active');
+      selectedSettingSeconds = seconds;
+      console.log('Selected setting seconds:', selectedSettingSeconds);
+      // Update/reset timer UI so player sees the chosen duration
+      if (selectedSettingSeconds) {
+        timerDuration = Number(selectedSettingSeconds);
+        timerFill.style.width = '100%';
+        // Update aria-label so screen-readers know the chosen duration
+        if (longPinBtn) longPinBtn.setAttribute('aria-label', 'Timer ' + formatTime(timerDuration));
+        timerRunning = false;
+        if (timerId) { clearInterval(timerId); timerId = null; }
+        longPinBtn.classList.remove('active');
+      } else {
+        resetTimer();
+      }
+    });
+  }
+
+  // Timer state and UI
+  const longPinBtn = document.getElementById('longPinBtn');
+  const timerFill = document.getElementById('timerFill');
+  let timerId = null;
+  let timerStartTs = null;
+  let timerDuration = null; // seconds
+  let timerRemaining = null;
+  let timerRunning = false;
+
+  function formatTime(s) {
+    if (s == null || isNaN(s)) return '--:--';
+    const mm = Math.floor(s / 60).toString().padStart(2, '0');
+    const ss = Math.floor(s % 60).toString().padStart(2, '0');
+    return `${mm}:${ss}`;
+  }
+
+  function updateTimerUI(remainingSec) {
+    const pct = Math.max(0, Math.min(1, remainingSec / timerDuration));
+    timerFill.style.width = `${pct * 100}%`;
+    // As timer runs, make fill lighter (simulate background showing)
+    const opacity = 0.12 + (0.6 * pct); // more visible at start
+    timerFill.style.background = `rgba(0,0,0,${opacity})`;
+  }
+
+  function tickTimer() {
+    const now = Date.now();
+    const elapsed = (now - timerStartTs) / 1000;
+    timerRemaining = Math.max(0, timerDuration - elapsed);
+    updateTimerUI(timerRemaining);
+    if (timerRemaining <= 0) {
+      stopTimer(true);
+    }
+  }
+
+  function startTimer() {
+    if (!selectedSettingSeconds) return; // nothing selected
+    if (timerRunning) return;
+    timerDuration = Number(selectedSettingSeconds);
+    timerRemaining = timerDuration;
+    timerStartTs = Date.now();
+    timerRunning = true;
+    updateTimerUI(timerRemaining);
+    timerId = setInterval(tickTimer, 250);
+    longPinBtn.classList.add('active');
+  }
+
+  function stopTimer(timeout=false) {
+    if (timerId) clearInterval(timerId);
+    timerId = null;
+    timerRunning = false;
+    if (timeout) {
+      // timer ended - signal by flashing label
+      timerFill.style.width = '0%';
+      longPinBtn.classList.remove('active');
+    }
+  }
+
+  function resetTimer() {
+    if (timerId) clearInterval(timerId);
+    timerId = null;
+    timerRunning = false;
+    timerStartTs = null;
+    timerDuration = null;
+    timerRemaining = null;
+    timerFill.style.width = '100%';
+    timerFill.style.background = 'rgba(0,0,0,0.12)';
+    longPinBtn.classList.remove('active');
+  }
+
+
+  
+
+  
   
 
 
@@ -1083,39 +1815,68 @@
     }, 10);
   }
 
+  // Dropdown functionality
+  let activeDropdown = null;
+
+  function toggleDropdown(type) {
+    const button = document.getElementById(type + 'NavBtn');
+    const panel = document.getElementById(type + 'Panel');
+
+    // Close other panels first
+    if (activeDropdown && activeDropdown !== panel) {
+      if (activeDropdown.getAttribute) activeDropdown.setAttribute('aria-hidden', 'true');
+      const activeBtn = document.querySelector('.dropdown-btn.active'); if (activeBtn) activeBtn.classList.remove('active');
+    }
+
+    // Toggle the requested panel
+    if (panel && panel.getAttribute('aria-hidden') === 'false') {
+      panel.setAttribute('aria-hidden', 'true');
+      if (button) button.classList.remove('active');
+      activeDropdown = null;
+    } else if (panel) {
+      panel.setAttribute('aria-hidden', 'false');
+      if (button) button.classList.add('active');
+      activeDropdown = panel;
+    }
+  }
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(event) {
+    // if a side-panel is open and click is outside any nav button or panel, close
+    if (activeDropdown) {
+      if (!event.target.closest('.dropdown-btn') && !event.target.closest('.side-panel')) {
+        if (activeDropdown.getAttribute) activeDropdown.setAttribute('aria-hidden', 'true');
+        const activeBtn = document.querySelector('.dropdown-btn.active'); if (activeBtn) activeBtn.classList.remove('active');
+        activeDropdown = null;
+      }
+    }
+  });
+
   function closeInstructions() {
-    const modal = document.getElementById('instructionsModal');
-    const content = modal.querySelector('.modal-content');
-    modal.classList.remove('show');
-    content.classList.remove('show');
-    setTimeout(() => {
-      modal.style.display = 'none';
-    }, 300);
+    const panel = document.getElementById('instructionsPanel');
+    const button = document.getElementById('instructionsNavBtn');
+    if (panel) panel.setAttribute('aria-hidden', 'true');
+    if (button) button.classList.remove('active');
+    activeDropdown = null;
   }
 
   function showSettings() {
-    const modal = document.getElementById('settingsModal');
-    const content = modal.querySelector('.modal-content');
-    modal.style.display = 'flex';
-    setTimeout(() => {
-      modal.classList.add('show');
-      content.classList.add('show');
-    }, 10);
+    toggleDropdown('settings');
   }
 
   function closeSettings() {
-    const modal = document.getElementById('settingsModal');
-    const content = modal.querySelector('.modal-content');
-    modal.classList.remove('show');
-    content.classList.remove('show');
-    setTimeout(() => {
-      modal.style.display = 'none';
-    }, 300);
+    const panel = document.getElementById('settingsPanel');
+    const button = document.getElementById('settingsNavBtn');
+    if (panel) panel.setAttribute('aria-hidden', 'true');
+    if (button) button.classList.remove('active');
+    activeDropdown = null;
   }
   
   // Start med home page
   showHome();
+  // performance mode removed — restoring original visuals
   // Kortdata
+
   const cardData = [
     {value: '2', cls: 'pair-2'}, {value: '2', cls: 'pair-2'},
     {value: '33', cls: 'pair-33'}, {value: '33', cls: 'pair-33'},
@@ -1226,10 +1987,10 @@
       newCardData.push({value: randomNumbers[i].toString(), cls: `dynamic-color-${i}`}); // Par
     }
     
-    // Bland kortenes positioner
-    const shuffled = shuffle(newCardData);
-    const container = document.getElementById('cardContainer');
-    container.innerHTML = '';
+  // Bland kortenes positioner
+  const shuffled = shuffle(newCardData);
+  const container = document.getElementById('cardContainer');
+  container.innerHTML = '';
     shuffled.forEach(card => {
       container.innerHTML += `
         <div class="card newcard"><div class="card-inner"><div class="card-front"></div><div class="card-back ${card.cls}">${card.value}</div></div></div>
@@ -1249,7 +2010,10 @@
     document.querySelectorAll('.card.newcard').forEach(function(card) {
       card.addEventListener('click', function handler() {
         if (lockBoard || flippedCards.includes(card)) return;
-        
+        // If a timer preset is selected and timer not running, start on first card click
+        if (selectedSettingSeconds && !timerRunning) {
+          startTimer();
+        }
 
         
         card.classList.add('flipped');
@@ -1282,10 +2046,6 @@
                 const allCards = document.querySelectorAll('.card');
                 const allMatchedCards = document.querySelectorAll('.card:not(.newcard)');
                 if (allMatchedCards.length === allCards.length) {
-                  if (timerInterval) {
-                    clearInterval(timerInterval);
-                    timerRunning = false;
-                  }
                   setTimeout(() => {
                     alert('Tillykke! Du klarede det! 🎉');
                   }, 500);
@@ -1299,7 +2059,7 @@
                 });
                 flippedCards = [];
                 lockBoard = false;
-              }, 200);
+              }, 250);
             }
           }, 310);
          }
