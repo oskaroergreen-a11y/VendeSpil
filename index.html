@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="da">
 
@@ -6,6 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vendespil</title>
   <style>
+        @media screen and (max-width: 600px) {
+      .game-wrapper {
+        align-items: initial !important;
+        padding-top: 18px;
+        justify-content: initial !important;
+        gap: 12px;
+      }
+    }
     /* Home/Start page styles */
     .home-wrapper {
       display: flex;
@@ -733,6 +743,7 @@
 
     /* Long glass pin at bottom of game area */
     .long-pin {
+      display:none; /* hidden by default, shown when timer active */
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
@@ -1565,7 +1576,7 @@
       <button class="nav-btn dropdown-btn" id="settingsNavBtn" onclick="toggleDropdown('settings')">
         <div class="button-header">
           <span class="nav-icon settings-icon">⚙</span>
-          spil_instillinger
+          Indstillinger
         </div>
       </button>
     </div>
@@ -1668,6 +1679,12 @@
   </div>
 
 <script>
+  let enableTime = false;
+  function updateTimerVisibility() {
+    if (longPinBtn) {
+      longPinBtn.style.display = enableTime ? '' : 'none';
+    }
+  }
   // Home/Start page logic
   const homeWrapper = document.getElementById('homeWrapper');
   const gameWrapper = document.getElementById('gameWrapper');
@@ -1698,13 +1715,16 @@
       console.log('Selected setting seconds:', selectedSettingSeconds);
       // Update/reset timer UI so player sees the chosen duration
       if (selectedSettingSeconds) {
-        timerDuration = Number(selectedSettingSeconds);
-        timerFill.style.width = '100%';
-        // Update aria-label so screen-readers know the chosen duration
-        if (longPinBtn) longPinBtn.setAttribute('aria-label', 'Timer ' + formatTime(timerDuration));
-        timerRunning = false;
-        if (timerId) { clearInterval(timerId); timerId = null; }
-        longPinBtn.classList.remove('active');
+        if (enableTime) {
+          timerDuration = Number(selectedSettingSeconds);
+          timerFill.style.width = '100%';
+          if (longPinBtn) longPinBtn.setAttribute('aria-label', 'Timer ' + formatTime(timerDuration));
+          timerRunning = false;
+          if (timerId) { clearInterval(timerId); timerId = null; }
+          longPinBtn.classList.remove('active');
+        } else {
+          resetTimer();
+        }
       } else {
         resetTimer();
       }
@@ -1714,6 +1734,7 @@
   // Timer state and UI
   const longPinBtn = document.getElementById('longPinBtn');
   const timerFill = document.getElementById('timerFill');
+  updateTimerVisibility();
   let timerId = null;
   let timerStartTs = null;
   let timerDuration = null; // seconds
@@ -1728,14 +1749,22 @@
   }
 
   function updateTimerUI(remainingSec) {
+    if (!enableTime) {
+      timerFill.style.width = '100%';
+      timerFill.style.background = 'rgba(0,0,0,0.12)';
+      return;
+    }
     const pct = Math.max(0, Math.min(1, remainingSec / timerDuration));
     timerFill.style.width = `${pct * 100}%`;
-    // As timer runs, make fill lighter (simulate background showing)
-    const opacity = 0.12 + (0.6 * pct); // more visible at start
+    const opacity = 0.12 + (0.6 * pct);
     timerFill.style.background = `rgba(0,0,0,${opacity})`;
   }
 
   function tickTimer() {
+    if (!enableTime) {
+      resetTimer();
+      return;
+    }
     const now = Date.now();
     const elapsed = (now - timerStartTs) / 1000;
     timerRemaining = Math.max(0, timerDuration - elapsed);
@@ -1746,6 +1775,10 @@
   }
 
   function startTimer() {
+    if (!enableTime) {
+      resetTimer();
+      return;
+    }
     if (!selectedSettingSeconds) return; // nothing selected
     if (timerRunning) return;
     timerDuration = Number(selectedSettingSeconds);
